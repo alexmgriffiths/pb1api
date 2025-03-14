@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/alexmgriffiths/pb1api/pb";
+
+message Transaction {
+    string ID = 1;
+    double amount = 2;
+}
+
+message TransactionsRequest {
+    string UserId = 1;
+}
+
+message NewTransactionRequest {
+    string UserId = 1;
+    double Amount = 2;
+}
+
+message TransactionsResponse {
+    repeated Transaction Txns = 3;
+}
+
+service TransactionsService {
+    rpc GetTransactions (TransactionsRequest) returns (TransactionsResponse);
+    rpc CreateTransaction (TransactionsRequest) returns (Transaction);
+}
