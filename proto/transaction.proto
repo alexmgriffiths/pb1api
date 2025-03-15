@@ -23,6 +23,6 @@ message TransactionsResponse {
 }
 
 service TransactionsService {
-    rpc GetTransactions (TransactionsRequest) returns (TransactionsResponse);
-    rpc CreateTransaction (TransactionsRequest) returns (Transaction);
+    rpc GetTransactions (TransactionsRequest) returns (TransactionsResponse) {}
+    rpc CreateTransaction (TransactionsRequest) returns (Transaction) {}
 }
