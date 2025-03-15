@@ -6,12 +6,10 @@ option go_package = "github.com/alexmgriffiths/pb1api/pb";
 
 import "common.proto";
 
-message HelloRequest {
-    string request_id = 1;
-}
+message HelloRequest {}
 
 message HelloResponse {
-    string request_id = 1;
+    string message = 1;
 }
 
 service HelloService {
