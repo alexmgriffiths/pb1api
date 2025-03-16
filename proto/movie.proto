@@ -31,14 +31,14 @@ message GetAllMoviesResponse {
 service MovieService {
     rpc CreateMovie(MovieRequest) returns (MovieResponse) {
         option (google.api.http) = {
-            post: "/api/V1/create/movie"
+            post: "/api/v1/create/movie"
             body: "*"
         };
     }
 
     rpc GetAllMovies(GetAllMoviesRequest) returns (GetAllMoviesResponse) {
         option (google.api.http) = {
-            get: "/api/V1/get/all/movies"
+            get: "/api/v1/get/all/movies"
         };
     }
 }

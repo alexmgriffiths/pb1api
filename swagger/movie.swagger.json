@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/V1/create/movie": {
+    "/api/v1/create/movie": {
       "post": {
         "operationId": "MovieService_CreateMovie",
         "responses": {
@@ -48,7 +48,7 @@
         ]
       }
     },
-    "/api/V1/get/all/movies": {
+    "/api/v1/get/all/movies": {
       "get": {
         "operationId": "MovieService_GetAllMovies",
         "responses": {
