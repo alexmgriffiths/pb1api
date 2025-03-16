@@ -36,7 +36,6 @@ service MovieService {
         };
     }
 
-
     rpc GetAllMovies(GetAllMoviesRequest) returns (GetAllMoviesResponse) {
         option (google.api.http) = {
             get: "/api/V1/get/all/movies"
