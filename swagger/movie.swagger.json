@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Movie Service",
+    "description": "Movie service description lorem ipsum dolor sit amet and whatnot",
     "version": "1.0.0",
     "contact": {
       "name": "Alex Griffiths",
@@ -263,9 +264,10 @@
     }
   },
   "securityDefinitions": {
-    "BearerAuth": {
+    "Bearer": {
       "type": "apiKey",
-      "name": "Bearer",
+      "description": "Obtained from authorizing",
+      "name": "Token",
       "in": "header"
     }
   }
