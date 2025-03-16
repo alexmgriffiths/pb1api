@@ -27,7 +27,7 @@ service HelloService {
             get: "/api/v1/boo"
         };
     }
-    rpc Greeter (HelloRequest) returns (HelloResponse) {
+    rpc Greeter (GreetRequest) returns (HelloResponse) {
         option (google.api.http) = {
             post: "/api/v1/greet",
             body: "*"
