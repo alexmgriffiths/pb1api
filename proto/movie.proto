@@ -5,40 +5,132 @@ package pb;
 option go_package = ".;pb";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
+// Movie Request Message
 message MovieRequest {
-    string name = 1;
-    string description = 2;
-    double rating = 3;
+    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Movie Name",
+        description: "The title of the movie.",
+        example: "\"Inception\""
+    }];
+    string description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Description",
+        description: "A brief summary of the movie.",
+        example: "\"A mind-bending thriller about dream invasion.\""
+    }];
+    double rating = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Rating",
+        description: "The movie rating on a scale of 1 to 10.",
+        example: "\"8.8\""
+    }];
 }
 
+// Movie Response Message
 message MovieResponse {
-    Movie movie = 1;
+    Movie movie = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "The created movie details."
+    }];
 }
 
+// Movie Entity
 message Movie {
-    string id = 1;
-    string name = 2;
-    string description = 3;
-    double rating = 4;
+    string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Movie ID",
+        description: "The unique identifier for the movie.",
+        example: "\"123e4567-e89b-12d3-a456-426614174000\""
+    }];
+    string name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Movie Name",
+        description: "The title of the movie.",
+        example: "\"Interstellar\""
+    }];
+    string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Description",
+        description: "A brief summary of the movie.",
+        example: "\"A team of astronauts travel through a wormhole in search of a new home.\""
+    }];
+    double rating = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Rating",
+        description: "The movie rating on a scale of 1 to 10.",
+        example: "\"9.0\""
+    }];
 }
 
+// Get All Movies Request (Empty for now)
 message GetAllMoviesRequest {}
+
+// Get All Movies Response
 message GetAllMoviesResponse {
-    repeated Movie movies = 1;
+    repeated Movie movies = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "A list of all movies."
+    }];
 }
 
+// Movie Service
 service MovieService {
+    // Create a new movie
     rpc CreateMovie(MovieRequest) returns (MovieResponse) {
         option (google.api.http) = {
-            post: "/api/v1/create/movie"
+            post: "/api/v1/movies"
             body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new movie",
+            description: "Adds a new movie to the collection and returns the created movie details.",
+            tags: ["Movies"],
+            responses: {
+                key: "200",
+                value: {
+                    description: "Movie created successfully.",
+                    examples: {
+                        key: "application/json",
+                        value: "{\"movie\": {\"id\": \"123e4567-e89b-12d3-a456-426614174000\", \"name\": \"Interstellar\", \"description\": \"A team of astronauts travel through a wormhole in search of a new home.\", \"rating\": 9.0}}"
+                    }
+                }
+            }
+            responses: {
+                key: "401",
+                value: { 
+                    description: "Invalid request body.",
+                    examples: {
+                        key: "application/json"
+                        value: "{\"error\": \"Unauthorized\"}"
+                    }
+                }
+            }
         };
     }
 
+    // Get all movies
     rpc GetAllMovies(GetAllMoviesRequest) returns (GetAllMoviesResponse) {
         option (google.api.http) = {
-            get: "/api/v1/get/all/movies"
+            get: "/api/v1/movies"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get all movies",
+            description: "Retrieves a list of all movies in the collection.",
+            tags: ["Movies"],
+            responses: {
+                key: "200",
+                value: {
+                    description: "A list of movies.",
+                    examples: {
+                        key: "application/json",
+                        value: "{\"movies\": [{\"id\": \"123e4567-e89b-12d3-a456-426614174000\", \"name\": \"Inception\", \"description\": \"A mind-bending thriller about dream invasion.\", \"rating\": 8.8}]}"
+                    }
+                }
+            }
+            responses: {
+                key: "404",
+                value: { 
+                    description: "No movies found." 
+                    examples: {
+                        key: "application/json",
+                        value: "{\"error\": \"No movies found.\"}"
+                    }
+                }
+            }
         };
     }
 }

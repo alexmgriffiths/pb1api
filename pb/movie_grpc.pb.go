@@ -26,8 +26,12 @@ const (
 // MovieServiceClient is the client API for MovieService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Movie Service
 type MovieServiceClient interface {
+	// Create a new movie
 	CreateMovie(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error)
+	// Get all movies
 	GetAllMovies(ctx context.Context, in *GetAllMoviesRequest, opts ...grpc.CallOption) (*GetAllMoviesResponse, error)
 }
 
@@ -62,8 +66,12 @@ func (c *movieServiceClient) GetAllMovies(ctx context.Context, in *GetAllMoviesR
 // MovieServiceServer is the server API for MovieService service.
 // All implementations must embed UnimplementedMovieServiceServer
 // for forward compatibility.
+//
+// Movie Service
 type MovieServiceServer interface {
+	// Create a new movie
 	CreateMovie(context.Context, *MovieRequest) (*MovieResponse, error)
+	// Get all movies
 	GetAllMovies(context.Context, *GetAllMoviesRequest) (*GetAllMoviesResponse, error)
 	mustEmbedUnimplementedMovieServiceServer()
 }

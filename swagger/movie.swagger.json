@@ -16,14 +16,78 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/create/movie": {
+    "/api/v1/movies": {
+      "get": {
+        "summary": "Get all movies",
+        "description": "Retrieves a list of all movies in the collection.",
+        "operationId": "MovieService_GetAllMovies",
+        "responses": {
+          "200": {
+            "description": "A list of movies.",
+            "schema": {
+              "$ref": "#/definitions/pbGetAllMoviesResponse"
+            },
+            "examples": {
+              "application/json": {
+                "movies": [
+                  {
+                    "id": "123e4567-e89b-12d3-a456-426614174000",
+                    "name": "Inception",
+                    "description": "A mind-bending thriller about dream invasion.",
+                    "rating": 8.8
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No movies found.",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "error": "No movies found."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Movies"
+        ]
+      },
       "post": {
+        "summary": "Create a new movie",
+        "description": "Adds a new movie to the collection and returns the created movie details.",
         "operationId": "MovieService_CreateMovie",
         "responses": {
           "200": {
-            "description": "A successful response.",
+            "description": "Movie created successfully.",
             "schema": {
               "$ref": "#/definitions/pbMovieResponse"
+            },
+            "examples": {
+              "application/json": {
+                "movie": {
+                  "id": "123e4567-e89b-12d3-a456-426614174000",
+                  "name": "Interstellar",
+                  "description": "A team of astronauts travel through a wormhole in search of a new home.",
+                  "rating": 9.0
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid request body.",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "error": "Unauthorized"
+              }
             }
           },
           "default": {
@@ -44,29 +108,7 @@
           }
         ],
         "tags": [
-          "MovieService"
-        ]
-      }
-    },
-    "/api/v1/get/all/movies": {
-      "get": {
-        "operationId": "MovieService_GetAllMovies",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbGetAllMoviesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "MovieService"
+          "Movies"
         ]
       }
     }
@@ -80,50 +122,77 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/pbMovie"
-          }
+          },
+          "description": "A list of all movies."
         }
-      }
+      },
+      "title": "Get All Movies Response"
     },
     "pbMovie": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "example": "123e4567-e89b-12d3-a456-426614174000",
+          "description": "The unique identifier for the movie.",
+          "title": "Movie ID"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "Interstellar",
+          "description": "The title of the movie.",
+          "title": "Movie Name"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": "A team of astronauts travel through a wormhole in search of a new home.",
+          "description": "A brief summary of the movie.",
+          "title": "Description"
         },
         "rating": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "example": "9.0",
+          "description": "The movie rating on a scale of 1 to 10.",
+          "title": "Rating"
         }
-      }
+      },
+      "title": "Movie Entity"
     },
     "pbMovieRequest": {
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "Inception",
+          "description": "The title of the movie.",
+          "title": "Movie Name"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": "A mind-bending thriller about dream invasion.",
+          "description": "A brief summary of the movie.",
+          "title": "Description"
         },
         "rating": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "example": "8.8",
+          "description": "The movie rating on a scale of 1 to 10.",
+          "title": "Rating"
         }
-      }
+      },
+      "title": "Movie Request Message"
     },
     "pbMovieResponse": {
       "type": "object",
       "properties": {
         "movie": {
-          "$ref": "#/definitions/pbMovie"
+          "$ref": "#/definitions/pbMovie",
+          "description": "The created movie details."
         }
-      }
+      },
+      "title": "Movie Response Message"
     },
     "protobufAny": {
       "type": "object",

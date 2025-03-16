@@ -90,7 +90,7 @@ func RegisterMovieServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.MovieService/CreateMovie", runtime.WithHTTPPathPattern("/api/v1/create/movie"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.MovieService/CreateMovie", runtime.WithHTTPPathPattern("/api/v1/movies"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -110,7 +110,7 @@ func RegisterMovieServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.MovieService/GetAllMovies", runtime.WithHTTPPathPattern("/api/v1/get/all/movies"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.MovieService/GetAllMovies", runtime.WithHTTPPathPattern("/api/v1/movies"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -168,7 +168,7 @@ func RegisterMovieServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/pb.MovieService/CreateMovie", runtime.WithHTTPPathPattern("/api/v1/create/movie"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/pb.MovieService/CreateMovie", runtime.WithHTTPPathPattern("/api/v1/movies"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -185,7 +185,7 @@ func RegisterMovieServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/pb.MovieService/GetAllMovies", runtime.WithHTTPPathPattern("/api/v1/get/all/movies"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/pb.MovieService/GetAllMovies", runtime.WithHTTPPathPattern("/api/v1/movies"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -202,8 +202,8 @@ func RegisterMovieServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 }
 
 var (
-	pattern_MovieService_CreateMovie_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "create", "movie"}, ""))
-	pattern_MovieService_GetAllMovies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "get", "all", "movies"}, ""))
+	pattern_MovieService_CreateMovie_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "movies"}, ""))
+	pattern_MovieService_GetAllMovies_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "movies"}, ""))
 )
 
 var (

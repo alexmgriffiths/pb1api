@@ -37,9 +37,44 @@
           "HelloService"
         ]
       }
+    },
+    "/api/v1/greet": {
+      "post": {
+        "operationId": "HelloService_Greeter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbHelloResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbHelloRequest"
+            }
+          }
+        ],
+        "tags": [
+          "HelloService"
+        ]
+      }
     }
   },
   "definitions": {
+    "pbHelloRequest": {
+      "type": "object"
+    },
     "pbHelloResponse": {
       "type": "object",
       "properties": {
