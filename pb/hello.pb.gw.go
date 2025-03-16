@@ -56,7 +56,7 @@ func local_request_HelloService_SayHello_0(ctx context.Context, marshaler runtim
 
 func request_HelloService_Greeter_0(ctx context.Context, marshaler runtime.Marshaler, client HelloServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq HelloRequest
+		protoReq GreetRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
@@ -68,7 +68,7 @@ func request_HelloService_Greeter_0(ctx context.Context, marshaler runtime.Marsh
 
 func local_request_HelloService_Greeter_0(ctx context.Context, marshaler runtime.Marshaler, server HelloServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq HelloRequest
+		protoReq GreetRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {

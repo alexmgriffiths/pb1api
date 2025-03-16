@@ -61,7 +61,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbHelloRequest"
+              "$ref": "#/definitions/pbGreetRequest"
             }
           }
         ],
@@ -72,8 +72,16 @@
     }
   },
   "definitions": {
-    "pbHelloRequest": {
-      "type": "object"
+    "pbGreetRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Alex",
+          "description": "The name to greet.",
+          "title": "Name"
+        }
+      }
     },
     "pbHelloResponse": {
       "type": "object",
