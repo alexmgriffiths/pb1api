@@ -6,8 +6,16 @@ package pb;
 option go_package = ".;pb";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message HelloRequest {}
+message GreetRequest {
+    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        title: "Name",
+        description: "The name to greet.",
+        example: "\"Alex\""
+    }];
+}
 
 message HelloResponse {
     string message = 1;
