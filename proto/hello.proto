@@ -1,20 +1,15 @@
+// This file is meant to be a minimal example of the protobufs
 syntax = "proto3";
 
 package pb;
 
-// Sample: https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/a_bit_of_everything.proto
 option go_package = ".;pb";
 
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
 
 message HelloRequest {}
 message GreetRequest {
-    string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        title: "Name",
-        description: "The name to greet.",
-        example: "\"Alex\""
-    }];
+    string name = 1;
 }
 
 message HelloResponse {

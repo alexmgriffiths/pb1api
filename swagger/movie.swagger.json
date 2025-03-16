@@ -1,13 +1,30 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "movie.proto",
-    "version": "version not set"
+    "title": "Movie Service",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Alex Griffiths",
+      "url": "https://githubcom/alexmgriffiths/pb1api",
+      "email": "alex@alexgriffiths.dev"
+    },
+    "license": {
+      "name": "BSD 3-Clause License",
+      "url": "https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE"
+    }
   },
   "tags": [
     {
+      "name": "Movie",
+      "description": "Movie Service"
+    },
+    {
       "name": "MovieService"
     }
+  ],
+  "schemes": [
+    "http",
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -39,6 +56,10 @@
                 ]
               }
             }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {}
           },
           "404": {
             "description": "No movies found.",
@@ -87,6 +108,24 @@
             "examples": {
               "application/json": {
                 "error": "Unauthorized"
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            },
+            "examples": {
+              "application/json": {
+                "code": 5,
+                "message": "Not Found",
+                "details": []
               }
             }
           },
@@ -221,6 +260,13 @@
           }
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Bearer",
+      "in": "header"
     }
   }
 }

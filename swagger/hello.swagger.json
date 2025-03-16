@@ -76,10 +76,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "example": "Alex",
-          "description": "The name to greet.",
-          "title": "Name"
+          "type": "string"
         }
       }
     },
