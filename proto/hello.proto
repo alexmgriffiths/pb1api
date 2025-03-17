@@ -28,4 +28,9 @@ service HelloService {
             body: "*"
         };
     }
+    rpc GreetJoel(HelloRequest) returns (HelloResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/joel"
+        };
+    }
 }

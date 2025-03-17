@@ -69,6 +69,28 @@
           "HelloService"
         ]
       }
+    },
+    "/api/v1/joel": {
+      "get": {
+        "operationId": "HelloService_GreetJoel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbHelloResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "HelloService"
+        ]
+      }
     }
   },
   "definitions": {

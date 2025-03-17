@@ -20,7 +20,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
             email: "alex@alexgriffiths.dev"
         },
         license: {
-            name: "BSD 3-Clause License"
+            name: "Proprietary - Internal Use Only"
             url: "https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE"
         }
     }
